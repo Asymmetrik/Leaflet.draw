@@ -17,7 +17,7 @@ L.Filter.Feature = L.Handler.extend({
 	},
 
 	enable: function () {
-		if (this._enabled) { return; }
+		if (this._enabled || this.isLocked()) { return; }
 
 		L.Handler.prototype.enable.call(this);
 
@@ -34,6 +34,16 @@ L.Filter.Feature = L.Handler.extend({
 		this._map.fire('filter:filterstop', { layerType: this.type });
 
 		this.fire('disabled', { handler: this.type });
+	},
+
+	lock: function(){
+		this._locked = true;
+	},
+	unlock: function(){
+		this._locked = false;
+	},
+	isLocked: function(){
+		return (null != this._locked && this._locked);
 	},
 
 	addHooks: function () {

@@ -54,9 +54,6 @@ L.Control.Filter = L.Control.extend({
 	},
 
 	_filterCreated: function(e){
-		// Set the filtered state on the toolbar
-		this._toolbar.setFiltered(true);
-
 		//Add the created shape to the filter group
 		this.options.filterGroup.addLayer(e.layer);
 
@@ -68,6 +65,9 @@ L.Control.Filter = L.Control.extend({
 
 		// Fire the event that we've updated the filter
 		this._map.fire('filter:filter', { geo: { type: e.layerType, bounds: e.layer.getBounds() } });
+
+		// Set the filtered state on the toolbar
+		this._toolbar.setFiltered(true);
 	},
 	_filterUpdated: function(e){
 		// Only process updates when we have a stored filter shape
@@ -83,14 +83,14 @@ L.Control.Filter = L.Control.extend({
 		}
 	},
 	_filterCleared: function(){
-		// Update the toolbar state
-		this._toolbar.setFiltered(false);
-
 		// Remove the filter shape
 		this.options.filterGroup.clearLayers();
 
 		// Fire the event
 		this._map.fire('filter:filter', { geo: undefined });
+
+		// Update the toolbar state
+		this._toolbar.setFiltered(false);
 	},
 
 	setFilteringOptions: function (options) {

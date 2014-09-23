@@ -84,8 +84,5 @@ L.Filter.SimpleShape = L.Filter.Feature.extend({
 		}
 
 		this.disable();
-		if (this.options.repeatMode) {
-			this.enable();
-		}
 	}
 });

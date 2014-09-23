@@ -212,6 +212,42 @@
 }
 
 /* ================================================================== */
+/* Filter toolbar
+/* ================================================================== */
+.leaflet-draw-toolbar .leaflet-draw-filter-rectangle {
+	background-position: -62px -2px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-filter-rectangle {
+	background-position: -60px -1px;
+}
+
+.leaflet-draw-toolbar .leaflet-draw-filter-circle {
+	background-position: -92px -2px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-filter-circle {
+	background-position: -90px -1px;
+}
+
+.leaflet-draw-toolbar .leaflet-draw-filter-clear {
+	background-position: -182px -2px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-filter-clear {
+	background-position: -180px -1px;
+}
+
+.leaflet-draw-toolbar .leaflet-draw-filter-clear.leaflet-disabled {
+	background-position: -242px -2px;
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-filter-clear.leaflet-disabled {
+	background-position: -240px -2px;
+}
+
+
+/* ================================================================== */
 /* Drawing styles
 /* ================================================================== */
 

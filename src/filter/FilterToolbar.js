@@ -1,9 +1,5 @@
 L.FilterToolbar = L.Toolbar.extend({
 
-	statics: {
-		TYPE: 'filter'
-	},
-
 	options: {
 		rectangle: {},
 		circle: {}
@@ -19,7 +15,7 @@ L.FilterToolbar = L.Toolbar.extend({
 			}
 		}
 
-		this._toolbarClass = 'leaflet-draw-draw';
+		this._toolbarClass = 'leaflet-draw-filter';
 		L.Toolbar.prototype.initialize.call(this, options);
 	},
 
@@ -39,6 +35,14 @@ L.FilterToolbar = L.Toolbar.extend({
 				title: L.drawLocal.draw.toolbar.buttons.circle
 			});
 		}
+		if(null != L.Filter.Clear){
+			handlers.push({
+				enabled: true,
+				handler: new L.Filter.Clear(map, this.options.clear),
+				title: L.drawLocal.filter.toolbar.buttons.clear
+			});
+		}
+
 		return handlers;
 	},
 
@@ -62,5 +66,9 @@ L.FilterToolbar = L.Toolbar.extend({
 				this._modes[type].handler.setOptions(options[type]);
 			}
 		}
+	},
+
+	setFiltered: function(filtered){
+		console.log(filtered);
 	}
 });

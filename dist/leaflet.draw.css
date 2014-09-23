@@ -212,9 +212,9 @@
 }
 
 /* ================================================================== */
-/* Filter toolbar
+/* Font-awesome toolbar
 /* ================================================================== */
-.leaflet-draw-toolbar.leaflet-filter-toolbar a {
+.leaflet-draw-toolbar.leaflet-fa-toolbar a {
 	background-image: none;
 }
 

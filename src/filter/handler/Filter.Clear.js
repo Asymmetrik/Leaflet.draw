@@ -16,7 +16,7 @@ L.Filter.Clear = L.Handler.extend({
 	},
 
 	enable: function () {
-		this._map.fire('filter:cleared', { layers: this._deletedLayers });
+		this._map.fire('filter:cleared');
 	},
 
 	disable: function () {

@@ -69,6 +69,18 @@ L.FilterToolbar = L.Toolbar.extend({
 	},
 
 	setFiltered: function(filtered){
-		console.log(filtered);
+		// "Clear all of the button states
+		L.DomUtil.removeClass(this._modes.rectangle.button, 'leaflet-disabled');
+		L.DomUtil.removeClass(this._modes.circle.button, 'leaflet-disabled');
+		L.DomUtil.removeClass(this._modes.clear.button, 'leaflet-disabled');
+
+		if(filtered){
+			// Disable the draw buttons if we're filtered
+			L.DomUtil.addClass(this._modes.rectangle.button, 'leaflet-disabled');
+			L.DomUtil.addClass(this._modes.circle.button, 'leaflet-disabled');
+		} else {
+			// Disable the clear button if there's nothing to clear
+			L.DomUtil.addClass(this._modes.clear.button, 'leaflet-disabled');
+		}
 	}
 });

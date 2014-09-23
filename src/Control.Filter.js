@@ -45,17 +45,43 @@ L.Control.Filter = L.Control.extend({
 		map.off('filter:created', this._filterCreated, this);
 		map.off('filter:cleared', this._filterCleared, this);
 
+		if(null != this._filterGroup){
+			// Unregister for the edit events
+			this._filterGroup.shape.off('edit', this._filterUpdated, this);
+		}
+
 		this._toolbar.removeToolbar();
 	},
 
 	_filterCreated: function(e){
 		this._updateFiltered(true);
 		this.options.filterGroup.addLayer(e.layer);
+		this._filterGroup = { shape: e.layer, type: e.layerType };
+
+		// Register for the edit events
+		this._filterGroup.shape.on('edit', this._filterUpdated, this);
+
+		this._map.fire('filter:filter', { geo: { type: e.layerType, bounds: e.layer.getBounds() } });
 	},
 
-	_filterCleared: function(e){
+	_filterUpdated: function(e){
+		if(null != this._filterGroup){
+			var payload = {
+				geo: {
+					type: this._filterGroup.type,
+					bounds: this._filterGroup.shape.getBounds()
+				}
+			};
+			// Only need to fire event
+			this._map.fire('filter:filter', payload);
+		}
+	},
+
+	_filterCleared: function(){
 		this._updateFiltered(false);
 		this.options.filterGroup.clearLayers();
+
+		this._map.fire('filter:filter', { geo: undefined });
 	},
 
 	_updateFiltered: function(){

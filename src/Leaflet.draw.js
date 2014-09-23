@@ -97,7 +97,11 @@ L.drawLocal = {
 	filter: {
 		toolbar: {
 			buttons: {
-				clear: 'Clear filter'
+				rectangle: 'Draw a bounding box filter',
+				circle: 'Draw a radial filter',
+				disabled: 'Filter already applied',
+				clear: 'Clear current filter',
+				clearDisabled: 'No active filter'
 			}
 		}
 	},

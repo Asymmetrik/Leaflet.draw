@@ -54,17 +54,23 @@ L.Control.Filter = L.Control.extend({
 	},
 
 	_filterCreated: function(e){
-		this._updateFiltered(true);
+		// Set the filtered state on the toolbar
+		this._toolbar.setFiltered(true);
+
+		//Add the created shape to the filter group
 		this.options.filterGroup.addLayer(e.layer);
+
+		// Store the internal representation of the filter state
 		this._filterGroup = { shape: e.layer, type: e.layerType };
 
-		// Register for the edit events
+		// Register for the edit events on the filter shape
 		this._filterGroup.shape.on('edit', this._filterUpdated, this);
 
+		// Fire the event that we've updated the filter
 		this._map.fire('filter:filter', { geo: { type: e.layerType, bounds: e.layer.getBounds() } });
 	},
-
 	_filterUpdated: function(e){
+		// Only process updates when we have a stored filter shape
 		if(null != this._filterGroup){
 			var payload = {
 				geo: {
@@ -72,21 +78,19 @@ L.Control.Filter = L.Control.extend({
 					bounds: this._filterGroup.shape.getBounds()
 				}
 			};
-			// Only need to fire event
+			// Only need to fire event - no need to update the toolbar
 			this._map.fire('filter:filter', payload);
 		}
 	},
-
 	_filterCleared: function(){
-		this._updateFiltered(false);
+		// Update the toolbar state
+		this._toolbar.setFiltered(false);
+
+		// Remove the filter shape
 		this.options.filterGroup.clearLayers();
 
+		// Fire the event
 		this._map.fire('filter:filter', { geo: undefined });
-	},
-
-	_updateFiltered: function(){
-		var filterGroup = this.options.filterGroup;
-		this._toolbar.setFiltered(true);
 	},
 
 	setFilteringOptions: function (options) {

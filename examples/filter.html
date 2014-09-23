@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet.draw vector editing handlers</title>
+
+	<link rel="stylesheet" href="libs/leaflet.css" />
+	<link rel="stylesheet" href="../dist/leaflet.draw.css" />
+
+	<script src="libs/leaflet-src.js"></script>
+
+	<script src="../src/Leaflet.draw.js"></script>
+
+	<script src="../src/filter/handler/Filter.Feature.js"></script>
+	<script src="../src/filter/handler/Filter.SimpleShape.js"></script>
+	<script src="../src/filter/handler/Filter.Rectangle.js"></script>
+	<script src="../src/filter/handler/Filter.Circle.js"></script>
+
+	<script src="../src/ext/LatLngUtil.js"></script>
+	<script src="../src/ext/GeometryUtil.js"></script>
+	<script src="../src/ext/LineUtil.Intersect.js"></script>
+	<script src="../src/ext/Polyline.Intersect.js"></script>
+	<script src="../src/ext/Polygon.Intersect.js"></script>
+
+	<script src="../src/Control.Filter.js"></script>
+	<script src="../src/Tooltip.js"></script>
+	<script src="../src/Toolbar.js"></script>
+
+	<script src="../src/filter/FilterToolbar.js"></script>
+
+</head>
+<body>
+	<div id="map" style="width: 800px; height: 600px; border: 1px solid #ccc"></div>
+
+	<script>
+		var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
+			map = new L.Map('map', {layers: [osm], center: new L.LatLng(51.505, -0.04), zoom: 13});
+
+		var drawnItems = new L.FeatureGroup();
+		map.addLayer(drawnItems);
+
+		var control = new L.Control.Filter({
+			position: 'topright',
+			filter: {
+				circle: {},
+				rectangle: {}
+			}
+		});
+		map.addControl(control);
+
+		map.on('filter:created', function (e) {
+			console.log("Created filter.");
+		});
+		
+	</script>
+</body>
+</html>

@@ -93,5 +93,12 @@ L.drawLocal = {
 				}
 			}
 		}
-	}
+	},
+	filter: {
+		toolbar: {
+			buttons: {
+				clear: 'Clear filter'
+			}
+		}
+	},
 };

@@ -45,7 +45,7 @@ L.Control.Filter = L.Control.extend({
 		map.off('filter:created', this._filterCreated, this);
 		map.off('filter:cleared', this._filterCleared, this);
 
-		if(null != this._filterGroup){
+		if (null != this._filterGroup) {
 			// Unregister for the edit events
 			this._filterGroup.shape.off('edit', this._filterUpdated, this);
 		}
@@ -69,7 +69,7 @@ L.Control.Filter = L.Control.extend({
 		// Set the filtered state on the toolbar
 		this._toolbar.setFiltered(true);
 	},
-	_filterUpdated: function(e){
+	_filterUpdated: function(){
 		// Only process updates when we have a stored filter shape
 		if(null != this._filterGroup){
 			var payload = {

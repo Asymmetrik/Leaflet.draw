@@ -12,6 +12,7 @@
 	"bitwise": true,
 	"camelcase": true,
 	"curly": true,
+	"eqnull": true,
 	"eqeqeq": true,
 	"forin": false,
 	"immed": true,
@@ -25,11 +26,11 @@
 	"quotmark": "single",
 
 	// whitespace
-	"indent": 4,
-	"trailing": true,
-	"white": true,
-	"smarttabs": true,
-	"maxlen": 150
+	// "indent": 4,
+	// "trailing": true,
+	// "white": true,
+	 "smarttabs": true
+	// "maxlen": 150
 
 	// code simplicity - not enforced but nice to check from time to time
 	// "maxstatements": 20,

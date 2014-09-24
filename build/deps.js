@@ -31,6 +31,17 @@ var deps = {
 		deps: ['Core']
 	},
 
+	FilterHandlers: {
+		src: [
+			'filter/handler/Filter.Feature.js',
+			'filter/handler/Filter.SimpleShape.js',
+			'filter/handler/Filter.Rectangle.js',
+			'filter/handler/Filter.Circle.js'
+		],
+		desc: 'Filter handlers for rectangles and circles',
+		deps: ['Core']
+	},
+
 	Extensions: {
 		src: [
 			'ext/LatLngUtil.js',
@@ -46,6 +57,7 @@ var deps = {
 		src: [
 			'Control.Draw.js',
 			'Toolbar.js',
+			'FontAwesomeToolbar.js',
 			'Tooltip.js'
 		],
 		desc: 'Common UI components used.',
@@ -68,6 +80,15 @@ var deps = {
 		],
 		desc: 'Edit toolbar.',
 		deps: ['EditHandlers', 'CommonUI']
+	},
+
+	FilterUI: {
+		src: [
+			'filter/FilterToolbar.js',
+			'filter/handler/Filter.Clear.js'
+		],
+		desc: 'Filter toolbar',
+		deps: ['FilterHandlers', 'CommonUI']
 	}
 };
 

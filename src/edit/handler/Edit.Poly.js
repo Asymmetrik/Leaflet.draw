@@ -170,10 +170,10 @@ L.Edit.Poly = L.Handler.extend({
 
 	_createMiddleMarker: function (marker1, marker2) {
 		var latlng = this._getMiddleLatLng(marker1, marker2),
-		    marker = this._createMarker(latlng),
-		    onClick,
-		    onDragStart,
-		    onDragEnd;
+			marker = this._createMarker(latlng),
+			onClick,
+			onDragStart,
+			onDragEnd;
 
 		marker.setOpacity(0.6);
 
@@ -185,8 +185,8 @@ L.Edit.Poly = L.Handler.extend({
 			marker._index = i;
 
 			marker
-			    .off('click', onClick, this)
-			    .on('click', this._onMarkerClick, this);
+				.off('click', onClick, this)
+				.on('click', this._onMarkerClick, this);
 
 			latlng.lat = marker.getLatLng().lat;
 			latlng.lng = marker.getLatLng().lng;
@@ -236,8 +236,8 @@ L.Edit.Poly = L.Handler.extend({
 
 	_getMiddleLatLng: function (marker1, marker2) {
 		var map = this._poly._map,
-		    p1 = map.project(marker1.getLatLng()),
-		    p2 = map.project(marker2.getLatLng());
+			p1 = map.project(marker1.getLatLng()),
+			p2 = map.project(marker2.getLatLng());
 
 		return map.unproject(p1._add(p2)._divideBy(2));
 	}

@@ -51,7 +51,7 @@ L.FilterToolbar = L.FontAwesomeToolbar.extend({
 	},
 
 	// Get the actions part of the toolbar
-	getActions: function (handler) {
+	getActions: function () {
 		return [
 			{
 				title: L.drawLocal.draw.toolbar.actions.title,

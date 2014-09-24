@@ -101,7 +101,18 @@ L.drawLocal = {
 				}
 			}
 		}
-	}
+	},
+	filter: {
+		toolbar: {
+			buttons: {
+				rectangle: 'Draw a bounding box filter',
+				circle: 'Draw a radial filter',
+				disabled: 'Filter already applied',
+				clear: 'Clear current filter',
+				clearDisabled: 'No active filter'
+			}
+		}
+	},
 };
 
 
@@ -2313,33 +2324,43 @@ L.DrawToolbar = L.Toolbar.extend({
 	},
 
 	getModeHandlers: function (map) {
-		return [
-			{
+		var handlers = [];
+		if(null != L.Draw.Polyline){
+			handlers.push({
 				enabled: this.options.polyline,
 				handler: new L.Draw.Polyline(map, this.options.polyline),
 				title: L.drawLocal.draw.toolbar.buttons.polyline
-			},
-			{
+			});
+		}
+		if(null != L.Draw.Polygon){
+			handlers.push({
 				enabled: this.options.polygon,
 				handler: new L.Draw.Polygon(map, this.options.polygon),
 				title: L.drawLocal.draw.toolbar.buttons.polygon
-			},
-			{
+			});
+		}
+		if(null != L.Draw.Rectangle){
+			handlers.push({
 				enabled: this.options.rectangle,
 				handler: new L.Draw.Rectangle(map, this.options.rectangle),
 				title: L.drawLocal.draw.toolbar.buttons.rectangle
-			},
-			{
+			});
+		}
+		if(null != L.Draw.Circle){
+			handlers.push({
 				enabled: this.options.circle,
 				handler: new L.Draw.Circle(map, this.options.circle),
 				title: L.drawLocal.draw.toolbar.buttons.circle
-			},
-			{
+			});
+		}
+		if(null != L.Draw.Marker){
+			handlers.push({
 				enabled: this.options.marker,
 				handler: new L.Draw.Marker(map, this.options.marker),
 				title: L.drawLocal.draw.toolbar.buttons.marker
-			}
-		];
+			});
+		}
+		return handlers;
 	},
 
 	// Get the actions part of the toolbar
@@ -2813,15 +2834,6 @@ L.EditToolbar.Delete = L.Handler.extend({
 		if (this._enabled || !this._hasAvailableLayers()) {
 			return;
 		}
-		this.fire('enabled', { handler: this.type});
-
-		this._map.fire('draw:deletestart', { handler: this.type });
-
-		L.Handler.prototype.enable.call(this);
-
-		this._deletableLayers
-			.on('layeradd', this._enableLayerDelete, this)
-			.on('layerremove', this._disableLayerDelete, this);
 	},
 
 	disable: function () {

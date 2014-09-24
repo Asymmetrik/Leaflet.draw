@@ -84,6 +84,7 @@ var deps = {
 
 	FilterUI: {
 		src: [
+			'Control.Filter.js',
 			'filter/FilterToolbar.js',
 			'filter/handler/Filter.Clear.js'
 		],

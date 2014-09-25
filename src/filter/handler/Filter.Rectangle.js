@@ -29,6 +29,20 @@ L.Filter.Rectangle = L.Filter.SimpleShape.extend({
 		L.Filter.SimpleShape.prototype.initialize.call(this, map, options);
 	},
 
+	getGeo: function(layer){
+		return {
+			type: 'rectangle',
+			northEast: {
+				lat: layer.getBounds()._northEast.lat,
+				lng: layer.getBounds()._northEast.lng,
+			},
+			southWest: {
+				lat: layer.getBounds()._southWest.lat,
+				lng: layer.getBounds()._southWest.lng,
+			}
+		};
+	},
+
 	_drawShape: function (latlng) {
 		if (!this._shape) {
 			this._shape = new L.Rectangle(new L.LatLngBounds(this._startLatLng, latlng), this.options.shapeOptions);

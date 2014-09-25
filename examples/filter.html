@@ -13,7 +13,6 @@
 	<script src="../src/filter/handler/Filter.Feature.js"></script>
 	<script src="../src/filter/handler/Filter.SimpleShape.js"></script>
 	<script src="../src/filter/handler/Filter.Rectangle.js"></script>
-	<script src="../src/filter/handler/Filter.Circle.js"></script>
 	<script src="../src/filter/handler/Filter.Clear.js"></script>
 
 	<script src="../src/edit/handler/Edit.Poly.js"></script>
@@ -48,7 +47,7 @@
 		var control = new L.Control.Filter({
 			position: 'topright',
 			filter: {
-				circle: {},
+				circle: false,
 				rectangle: {}
 			},
 			filterGroup: drawnItems

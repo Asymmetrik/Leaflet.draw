@@ -64,7 +64,7 @@ L.Control.Filter = L.Control.extend({
 		this._filterGroup.shape.on('edit', this._filterUpdated, this);
 
 		// Fire the event that we've updated the filter
-		this._map.fire('filter:filter', { geo: { type: e.layerType, bounds: e.layer.getBounds() } });
+		this._map.fire('filter:filter', { geo : this._getGeo(e.layerType, e.layer) });
 
 		// Set the filtered state on the toolbar
 		this._toolbar.setFiltered(true);
@@ -73,10 +73,7 @@ L.Control.Filter = L.Control.extend({
 		// Only process updates when we have a stored filter shape
 		if(null != this._filterGroup){
 			var payload = {
-				geo: {
-					type: this._filterGroup.type,
-					bounds: this._filterGroup.shape.getBounds()
-				}
+				geo: this._getGeo(this._filterGroup.type, this._filterGroup.shape)
 			};
 			// Only need to fire event - no need to update the toolbar
 			this._map.fire('filter:filter', payload);
@@ -91,6 +88,10 @@ L.Control.Filter = L.Control.extend({
 
 		// Update the toolbar state
 		this._toolbar.setFiltered(false);
+	},
+
+	_getGeo: function(layerType, layer){
+		return this._toolbar.getGeo(layerType, layer);
 	},
 
 	setFilteringOptions: function (options) {

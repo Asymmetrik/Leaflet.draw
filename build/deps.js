@@ -35,8 +35,7 @@ var deps = {
 		src: [
 			'filter/handler/Filter.Feature.js',
 			'filter/handler/Filter.SimpleShape.js',
-			'filter/handler/Filter.Rectangle.js',
-			'filter/handler/Filter.Circle.js'
+			'filter/handler/Filter.Rectangle.js'
 		],
 		desc: 'Filter handlers for rectangles and circles',
 		deps: ['Core']

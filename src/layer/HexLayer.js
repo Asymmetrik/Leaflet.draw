@@ -14,7 +14,8 @@ L.HexLayer = L.Class.extend({
 		},
 		y: function(d){
 			return d[1];
-		}
+		},
+		colorRange: ['#f7fbff', '#08306b']
 	},
 
 	initialize : function(options) {
@@ -22,6 +23,7 @@ L.HexLayer = L.Class.extend({
 		this._layout = d3.hexbin().radius(this.options.radius);
 		this._data = [];
 		this._levels = {};
+		this._colorScale = d3.scale.linear().range(this.options.colorRange);
 	},
 
 	onAdd : function(map) {
@@ -121,6 +123,7 @@ L.HexLayer = L.Class.extend({
 	_createHexagons : function(g) {
 		var that = this;
 
+		// Generate the mapped version of the data
 		var data = that._data.map(function(d) {
 			var coord = that.options.coord(d);
 			var x = that.options.x(coord);
@@ -129,14 +132,28 @@ L.HexLayer = L.Class.extend({
 			return that._project([x, y]);
 		});
 
+		// Create the bins using the hexbin layout
 		var bins = that._layout(data);
+		that._colorScale.domain([0, bins.reduce(function(val, element, index){
+			return Math.max(val, element.length);
+		}, 0)]);
 
-		var join = g.selectAll('.hexbin-hexagon').data(bins, function(d){ return d.i + ":" + d.j; });
+		// Update the d3 visualization
+		var join = g.selectAll('path.hexbin-hexagon').data(bins, function(d){ return d.i + ":" + d.j; });
+
 		join.enter().append('path').attr('class', 'hexbin-hexagon')
 			.attr('d', function(d){
 				return 'M' + d.x + ',' + d.y + that._layout.hexagon();
-			});
-		join.exit().remove();
+			})
+			.attr('opacity', 0.01)
+			.transition().duration(200)
+			.attr('opacity', 0.4);
+
+		join.attr('fill', function(d){ return that._colorScale(d.length); });
+
+		join.exit().transition().duration(200)
+			.attr('opacity', 0.01)
+			.remove();
 	},
 
 	_project : function(coord) {

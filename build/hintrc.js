@@ -4,6 +4,7 @@
 	"node": true,
 	"globals": {
 		"L": true,
+		"d3": true,
 		"define": true
 	},
 	"strict": false,

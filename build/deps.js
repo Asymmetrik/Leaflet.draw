@@ -89,6 +89,14 @@ var deps = {
 		],
 		desc: 'Filter toolbar',
 		deps: ['FilterHandlers', 'CommonUI']
+	},
+
+	Layers: {
+		src: [
+			'layer/HexLayer.js'
+		],
+		desc: 'Custom layers',
+		deps: []
 	}
 };
 

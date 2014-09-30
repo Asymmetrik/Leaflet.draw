@@ -41,7 +41,9 @@
     "url": "https://github.com/Leaflet/Leaflet.draw.git"
   },
   "dependencies": {
-    "leaflet-dist": "0.7.x"
+    "leaflet-dist": "0.7.x",
+    "fontawesome": "~4.2.0"
+    "d3": "~3.4.11"
   },
   "devDependencies": {
     "leaflet": "~0.7.0",
